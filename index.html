@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#58cc02">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Öğrenio">
+<meta name="description" content="1. sınıf için okuma, yazma ve matematik oyunları">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Öğrenio - Eğlenerek Öğren</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="top"></header>
+  <main id="view"></main>
+  <nav id="tabs"></nav>
+</div>
+
+<div id="lesson" class="overlay hidden">
+  <div class="l-top"><button class="x" id="lx" aria-label="Kapat">✕</button><div class="bar"><i id="lbar"></i></div><span id="lcount"></span></div>
+  <div class="l-body">
+    <div class="mascot-row"><div class="mascot" id="lmascot">🦊</div><div class="bubble" id="lbubble"></div></div>
+    <div class="qcard" id="qcard"></div>
+  </div>
+  <div class="sheet idle" id="sheet"><div class="smsg" id="smsg"></div><button class="btn wide" id="sbtn"></button></div>
+</div>
+
+<div id="game" class="overlay hidden"></div>
+<div id="reader" class="overlay hidden"></div>
+<div id="modal" class="hidden"></div>
+<div id="fx"></div>
+
+<script src="data.js"></script>
+<script src="stories.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
