@@ -18,6 +18,26 @@ function syllabify(w){
 }
 
 const STORIES=[
+{id:"nane",title:"Nane ile Lale",cover:"🌿🌷",level:1,color:"#e3f9d8",pages:[
+ {pic:"🌿 🌷",text:"Bu nane. Bu lale."},
+ {pic:"🟢🔴",text:"Nane yeşil. Lale kırmızı."},
+ {pic:"👧🌿",text:"Ela nane kokladı."},
+ {pic:"👦🌷",text:"Ali lale kokladı."},
+ {pic:"🌼",text:"Bahçe çok güzel!"}],
+ quiz:[["Nane ne renk?","yeşil",["yeşil","kırmızı","mavi"]],["Ela neyi kokladı?","nane",["nane","top","kitap"]],["Ali neyi kokladı?","lale",["lale","nane","elma"]]]},
+{id:"kek",title:"Kek Zamanı",cover:"🧁",level:1,color:"#ffe6ef",pages:[
+ {pic:"👩🧁",text:"Anne kek yaptı."},
+ {pic:"👃",text:"Kek çok güzel kokuyor."},
+ {pic:"👧👦",text:"Ela keke baktı. Ali keke baktı."},
+ {pic:"🔪",text:"Anne keki kesti."},
+ {pic:"😋",text:"Herkes kek yedi. Ne güzel!"}],
+ quiz:[["Anne ne yaptı?","kek",["kek","pasta","ekmek"]],["Keki kim kesti?","anne",["anne","baba","Ali"]],["Kek nasıl kokuyor?","güzel",["güzel","kötü","soğuk"]]]},
+{id:"kus",title:"Küçük Kuş",cover:"🐦",level:1,color:"#e0f3ff",pages:[
+ {pic:"🐦",text:"Bu küçük bir kuş."},
+ {pic:"🌳🐦",text:"Kuş ağaçta."},
+ {pic:"🎵",text:"Kuş şarkı söyler."},
+ {pic:"☁️🐦",text:"Kuş uçtu. Güle güle kuş!"}],
+ quiz:[["Kuş nerede?","ağaçta",["ağaçta","evde","denizde"]],["Kuş ne söyler?","şarkı",["şarkı","kitap","top"]],["Kuş ne yaptı?","uçtu",["uçtu","yüzdü","uyudu"]]]},
 {id:"ela-ahmet",title:"Ela ile Ahmet",cover:"👧👦",level:1,color:"#e6f9d2",pages:[
  {pic:"👧 👦",text:"Bu Ela. Bu Ahmet."},
  {pic:"🌳🌼",text:"Ela ile Ahmet parka gitti."},
