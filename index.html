@@ -9,13 +9,25 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Öğrenio">
 <meta name="description" content="1. sınıf için okuma, yazma ve matematik oyunları">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest?v=3">
+<link rel="icon" href="icon-192.png?v=3">
+<link rel="apple-touch-icon" href="icon-192.png?v=3">
 <title>Öğrenio - Eğlenerek Öğren</title>
+<style>
+#splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(180deg,#7be32a,#2e9e00);color:#fff;font-family:"Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;animation:spOut .5s ease 1.6s forwards}
+#splash img{width:150px;height:150px;border-radius:34px;box-shadow:0 10px 0 rgba(0,0,0,.2),0 18px 30px rgba(0,0,0,.25);animation:spPop .7s cubic-bezier(.2,1.4,.4,1) both}
+#splash b{font-size:2.4rem;font-weight:900;letter-spacing:.5px;text-shadow:0 3px 0 rgba(0,0,0,.2);animation:spUp .6s .25s ease both}
+#splash span{font-size:1.1rem;font-weight:800;opacity:.95;animation:spUp .6s .45s ease both}
+@keyframes spPop{from{transform:scale(.3) rotate(-12deg);opacity:0}}
+@keyframes spUp{from{transform:translateY(14px);opacity:0}}
+@keyframes spOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+</style>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="splash"><img src="icon-512.png?v=3" alt=""><b>Öğrenio</b><span>Eğlenerek Öğren</span></div>
+<script>setTimeout(function(){var s=document.getElementById("splash");if(s)s.remove()},2300)</script>
+
 <div id="app">
   <header id="top"></header>
   <main id="view"></main>
