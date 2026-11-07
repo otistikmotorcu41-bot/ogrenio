@@ -17,7 +17,8 @@ const RAW=[
 ["ba-lon","🎈"],["ev","🏠"],["o-kul","🏫"],["ka-pı","🚪"],["a-nah-tar","🔑"],["ya-tak","🛏️"],["sa-at","⌚"],["te-le-fon","📱"],
 ["göz-lük","👓"],["şap-ka","🎩"],["el-bi-se","👗"],["a-yak-ka-bı","👟"],["çi-çek","🌸"],["a-ğaç","🌳"],["or-man","🌲"],["gü-neş","☀️"],
 ["ay","🌙"],["yıl-dız","⭐"],["bu-lut","☁️"],["yağ-mur","🌧️"],["kar","❄️"],["de-niz","🌊"],["dağ","⛰️"],["şem-si-ye","☂️"],
-["ı-şık","💡"],["mum","🕯️"],["ka-şık","🥄"],["diş","🦷"],["kalp","❤️"],["re-sim","🖼️"],["he-li-kop-ter","🚁"],["kap-lum-ba-ğa","🐢"],["bil-gi-sa-yar","💻"],["te-le-viz-yon","📺"],["çi-ko-la-ta","🍫"],["ma-ka-ra-na","🍝"],["o-to-büs","🚌"],["ro-ket","🚀"],["til-ki","🦊"]
+["ı-şık","💡"],["mum","🕯️"],["ka-şık","🥄"],["diş","🦷"],["kalp","❤️"],["re-sim","🖼️"],["he-li-kop-ter","🚁"],["kap-lum-ba-ğa","🐢"],["bil-gi-sa-yar","💻"],["te-le-viz-yon","📺"],["çi-ko-la-ta","🍫"],["ma-ka-ra-na","🍝"],["o-to-büs","🚌"],["ro-ket","🚀"],["til-ki","🦊"],
+["na-ne","🌿"],["la-le","🌷"],["kol","💪"],["kek","🧁"],["el","✋"],["ok","🏹"],["ke-çi","🐐"],["ka-le","🏰"]
 ];
 const WORDS=RAW.map(([s,e])=>({w:s.replace(/-/g,""),e,syl:s.split("-")}));
 
@@ -245,7 +246,7 @@ const GENS={letterHear:gLetterHear,case:gCase,letterWord:gLetterWord,firstLetter
 function keyOf(q){return [q.prompt,q.big||"",q.pic||"",q.text||"",q.answer||q.solution.join("|")].join("§");}
 function makeOne(name,ctx,avoid){
   let q,g=0;
-  do{q=GENS[name](ctx);q.gen=name;q.ctx=ctx;q.key=keyOf(q);}while(avoid&&avoid.has(q.key)&&g++<40);
+  do{q=GENS[name](ctx);if(ctx.easy&&q.kind==="choice"&&q.options.length>3){const wr=q.options.filter(o=>o!==q.answer);q.options=shuffle([q.answer,...wr.slice(0,2)]);if(q.optStyle==="num")q.options.sort((x,y)=>x-y);}q.gen=name;q.ctx=ctx;q.key=keyOf(q);}while(avoid&&avoid.has(q.key)&&g++<40);
   return q;
 }
 function buildQuestions(names,ctx,n){
@@ -279,7 +280,7 @@ const UNITS=[
  {title:"Sayılar Gezegeni",sub:"Say, karşılaştır, oku",icon:"🪐",color:"#7c5cff",dark:"#5f43d6",
   lessons:[["Say",["count","numWord"],{max:10}],["Sıra ve Karşılaştır",["numSeq","compare","count"],{max:10}],["20’ye Kadar",["numWord","numSeq","compare","count"],{max:20}]]},
  {title:"Toplama - Çıkarma",sub:"İşlem zamanı!",icon:"➕",color:"#ef476f",dark:"#c93659",
-  lessons:[["Toplama",["add","makeTen"],{max:10}],["Çıkarma",["sub","add"],{max:10}],["Problemler",["story","add","sub"],{max:20}]]},
+  lessons:[["Toplama",["add","makeTen"],{max:10}],["Çıkarma",["sub","add"],{max:10}],["Problemler",["story","add","sub"],{max:10}]]},
  {title:"Şekil ve Örüntü",sub:"Zeka oyunları",icon:"🔷",color:"#118ab2",dark:"#0b6f91",
   lessons:[["Şekiller",["shape","pattern"],{max:10}],["Örüntüler",["pattern","story","shape"],{max:10}],["Büyük Final",["shape","pattern","add","sub","story","count","build","picWord"],{max:20}]]},
  {title:"Uzun Kelimeler",sub:"Büyük kelimeleri parçala!",icon:"🚁",color:"#e76f51",dark:"#c45a3f",
@@ -289,8 +290,10 @@ function ctxFor(ui,li){
   const u=UNITS[ui],les=u.lessons[li],letters=u.letters||ALPHABET;
   let words=WORDS;
   if(u.letters){const f=WORDS.filter(w=>u.letters.some(l=>w.w.includes(l)));if(f.length>=6)words=f;}
+  const easy=ui<8;
+  if(easy&&!(les[2]&&les[2].minSyl)){const f=words.filter(w=>w.syl.length<=(ui<5?2:3)&&w.w.length<=(ui<5?5:8));if(f.length>=6)words=f;}
   if(les[2]&&les[2].minSyl){const f=WORDS.filter(w=>w.syl.length>=les[2].minSyl);if(f.length>=4)words=f;}
-  return {letters,words,max:(les[2]&&les[2].max)||10,maxLen:les[2]&&les[2].maxLen};
+  return {letters,words,max:(les[2]&&les[2].max)||10,maxLen:(les[2]&&les[2].maxLen)||(ui<5?5:7),easy};
 }
 const PRACTICE={
  reading:["picWord","firstLetter","letterWord","hasLetter","case"],
